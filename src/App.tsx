@@ -354,9 +354,9 @@ const App: FC = () => {
                 return;
             }
             // 升级
-            setLevel(level + 1);
+            setLevel(level + 49);
             setQueue([]);
-            checkCover(makeScene(level + 1, curTheme.icons));
+            checkCover(makeScene(level + 49, curTheme.icons));
         } else {
             setQueue(updateQueue);
             checkCover(updateScene);
