@@ -67,13 +67,25 @@ const makeScene: (level: number, icons: Icon[]) => Scene = (level, icons) => {
     };
 
     // 大于5级别增加icon池
+    // debugger
     let compareLevel = curLevel;
-    while (compareLevel > 0) {
-        iconPool.push(
-            ...iconPool.slice(0, Math.min(10, 2 * (compareLevel - 5)))
-        );
-        compareLevel -= 5;
+    if(curLevel===1){
+        while (compareLevel > 0) {
+            iconPool.push(
+                ...iconPool.slice(0, Math.min(10, 2 * (compareLevel - 5)))
+            );
+            compareLevel -= 5;
+        }
+    }else {
+        compareLevel=50;
+        while (compareLevel > 0) {
+            iconPool.push(
+                ...iconPool.slice(0, Math.min(10, 2 * (compareLevel - 5)))
+            );
+            compareLevel -= 5;
+        }
     }
+
 
     for (const icon of iconPool) {
         for (let i = 0; i < 6; i++) {
