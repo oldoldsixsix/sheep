@@ -9,16 +9,14 @@ import React, {
 import './App.css';
 import { GithubIcon } from './GithubIcon';
 import { randomString, waitTimeout } from './utils';
-import { defaultTheme } from './themes/default';
 import { Icon, Theme } from './themes/interface';
 import { fishermanTheme } from './themes/fisherman';
-import { jinlunTheme } from './themes/jinlun';
 
 // 主题
-const themes = [defaultTheme, fishermanTheme, jinlunTheme];
+const themes = [fishermanTheme];
 
 // 最大关卡
-const maxLevel = 50;
+const maxLevel = 2;
 
 interface MySymbol {
     id: string;
@@ -34,7 +32,11 @@ type Scene = MySymbol[];
 // 8*8网格  4*4->8*8
 const makeScene: (level: number, icons: Icon[]) => Scene = (level, icons) => {
     const curLevel = Math.min(maxLevel, level);
-    const iconPool = icons.slice(0, 2 * curLevel);
+    let iconPool = icons.slice(0, 3 * curLevel);
+    if(curLevel==2){
+        iconPool =icons.slice(0, 10);
+    }
+
     const offsetPool = [0, 25, -25, 50, -50].slice(0, 1 + curLevel);
 
     const scene: Scene = [];
@@ -144,7 +146,7 @@ const Symbol: FC<SymbolProps> = ({ x, y, icon, isCover, status, onClick }) => {
 };
 
 const App: FC = () => {
-    const [curTheme, setCurTheme] = useState<Theme<any>>(defaultTheme);
+    const [curTheme, setCurTheme] = useState<Theme<any>>(fishermanTheme);
     const [scene, setScene] = useState<Scene>(makeScene(1, curTheme.icons));
     const [level, setLevel] = useState<number>(1);
     const [queue, setQueue] = useState<MySymbol[]>([]);
@@ -365,23 +367,10 @@ const App: FC = () => {
 
     return (
         <>
-            <h2>有解的羊了个羊(DEMO)</h2>
-            <h6>
-                <GithubIcon />
-            </h6>
+            {/*<h6>*/}
+            {/*    <GithubIcon />*/}
+            {/*</h6>*/}
             <h3 className="flex-container flex-center">
-                主题:
-                <select
-                    onChange={(e) =>
-                        setCurTheme(themes[Number(e.target.value)])
-                    }
-                >
-                    {themes.map((t, idx) => (
-                        <option key={t.name} value={idx}>
-                            {t.name}
-                        </option>
-                    ))}
-                </select>
                 Level: {level}
             </h3>
 
@@ -422,13 +411,6 @@ const App: FC = () => {
                 </button>
                 {/*<button onClick={test}>测试</button>*/}
             </div>
-
-            <p>
-                <span id="busuanzi_container_site_pv">
-                    累计访问：<span id="busuanzi_value_site_pv"></span>次
-                </span>
-            </p>
-
             {finished && (
                 <div className="modal">
                     <h1>{tipText}</h1>
@@ -439,7 +421,7 @@ const App: FC = () => {
             {/*bgm*/}
             <button className="bgm-button" onClick={() => setBgmOn(!bgmOn)}>
                 {bgmOn ? '🔊' : '🔈'}
-                <audio ref={bgmRef} loop src="/sound-disco.mp3" />
+                <audio ref={bgmRef} loop src="/zztdd.mp3" />
             </button>
 
             {/*音效*/}
