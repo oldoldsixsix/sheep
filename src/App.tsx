@@ -16,7 +16,7 @@ import { fishermanTheme } from './themes/fisherman';
 const themes = [fishermanTheme];
 
 // 最大关卡
-const maxLevel = 2;
+const maxLevel = 50;
 
 interface MySymbol {
     id: string;
@@ -31,11 +31,9 @@ type Scene = MySymbol[];
 
 // 8*8网格  4*4->8*8
 const makeScene: (level: number, icons: Icon[]) => Scene = (level, icons) => {
+    debugger
     const curLevel = Math.min(maxLevel, level);
     let iconPool = icons.slice(0, 3 * curLevel);
-    if(curLevel==2){
-        iconPool =icons.slice(0, 10);
-    }
 
     const offsetPool = [0, 25, -25, 50, -50].slice(0, 1 + curLevel);
 
@@ -69,22 +67,12 @@ const makeScene: (level: number, icons: Icon[]) => Scene = (level, icons) => {
     // 大于5级别增加icon池
     // debugger
     let compareLevel = curLevel;
-    if(curLevel===1){
         while (compareLevel > 0) {
             iconPool.push(
                 ...iconPool.slice(0, Math.min(10, 2 * (compareLevel - 5)))
             );
             compareLevel -= 5;
         }
-    }else {
-        compareLevel=50;
-        while (compareLevel > 0) {
-            iconPool.push(
-                ...iconPool.slice(0, Math.min(10, 2 * (compareLevel - 5)))
-            );
-            compareLevel -= 5;
-        }
-    }
 
 
     for (const icon of iconPool) {
@@ -289,9 +277,9 @@ const App: FC = () => {
             return;
         }
         setFinished(false);
-        setLevel(level + 1);
+        setLevel(level + 49);
         setQueue([]);
-        checkCover(makeScene(level + 1, curTheme.icons));
+        checkCover(makeScene(level + 49, curTheme.icons));
     };
 
     // 重开
@@ -383,7 +371,7 @@ const App: FC = () => {
             {/*    <GithubIcon />*/}
             {/*</h6>*/}
             <h3 className="flex-container flex-center">
-                Level: {level}
+                Level: {level===1?1:2}
             </h3>
 
             <div className="app">
