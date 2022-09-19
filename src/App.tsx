@@ -421,7 +421,7 @@ const App: FC = () => {
             {/*bgm*/}
             <button className="bgm-button" onClick={() => setBgmOn(!bgmOn)}>
                 {bgmOn ? '🔊' : '🔈'}
-                <audio ref={bgmRef} loop src="/zztdd.mp3" />
+                <audio autoPlay={true} ref={bgmRef} loop src="/zztdd.mp3" />
             </button>
 
             {/*音效*/}
