@@ -16,7 +16,7 @@ import { fishermanTheme } from './themes/fisherman';
 const themes = [fishermanTheme];
 
 // 最大关卡
-const maxLevel = 50;
+const maxLevel = 40;
 
 interface MySymbol {
     id: string;
@@ -277,9 +277,9 @@ const App: FC = () => {
             return;
         }
         setFinished(false);
-        setLevel(level + 49);
+        setLevel(level + 39);
         setQueue([]);
-        checkCover(makeScene(level + 49, curTheme.icons));
+        checkCover(makeScene(level + 39, curTheme.icons));
     };
 
     // 重开
@@ -354,9 +354,9 @@ const App: FC = () => {
                 return;
             }
             // 升级
-            setLevel(level + 49);
+            setLevel(level + 39);
             setQueue([]);
-            checkCover(makeScene(level + 49, curTheme.icons));
+            checkCover(makeScene(level + 39, curTheme.icons));
         } else {
             setQueue(updateQueue);
             checkCover(updateScene);
