@@ -417,6 +417,7 @@ const App: FC = () => {
                     <button onClick={restart}>再来一次</button>
                 </div>
             )}
+            <p style={{color:"#535bf2"}}>by玛雅七</p>
 
             {/*bgm*/}
             <button className="bgm-button" onClick={() => setBgmOn(!bgmOn)}>
