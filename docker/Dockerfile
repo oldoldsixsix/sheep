@@ -2,8 +2,6 @@
 #使用 nginx最新版本作为基础镜像
 FROM registry.cn-shenzhen.aliyuncs.com/sibionics_dev/nginx:1.20.1
 
-# 将当前文件夹的 nginx.conf 文件复制到容器的 /etc/nginx/ 目录
-COPY docker/online/nginx.conf /etc/nginx/
 
 #将当前文件夹的dist文件复制到容器的/etc/nginx/html/目录
 COPY dist /etc/nginx/html/dist
